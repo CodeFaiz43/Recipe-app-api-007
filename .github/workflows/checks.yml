@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
 #this step checks out the repository so that we can access the code
+#pushing code to github to check activity
       - name: login to docker hub
         uses: docker/login-action@v1
         with:
