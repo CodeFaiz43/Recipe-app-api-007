@@ -14,10 +14,10 @@ jobs:
 #this step checks out the repository so that we can access the code
 #pushing code to github to check activity
       - name: login to docker hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Check out repository code
         uses: actions/checkout@v2
 #this checkout is action by github as we need to run test and linting on code 
