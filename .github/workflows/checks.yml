@@ -16,7 +16,7 @@ jobs:
       - name: login to docker hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_US }}
+          username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Check out repository code
         uses: actions/checkout@v2
