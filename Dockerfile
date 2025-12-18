@@ -13,12 +13,20 @@ EXPOSE 8000
 ARG DEV=false
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    #adding packages for database pkgs
+    apk add --no-cache postgresql-client && \
+    apk add --no-cache --virtual .tmp-build-deps \
+    #group virtual pkgs into group called .tmp-build-deps
+        build-base \
+        postgresql-dev \
+        musl-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     #for development environment install the dev requirements else avoid it 
     if [ "$DEV" = "true" ] ; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \

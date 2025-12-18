@@ -11,4 +11,27 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    #setting env var for application to use to conect to database
+    environment:
+      - DB_HOST=db
+      - DB_NAME=dev_db
+      - DB_USER=devuser
+      - DB_PASSWORD=dev@007
+    #here we tell that app service depends on db service to start first before app service
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    #setting configuration for postgres database
+    environment:
+      - POSTGRES_DB=dev_db
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=dev@007
+
+volumes:
+  dev-db-data:
