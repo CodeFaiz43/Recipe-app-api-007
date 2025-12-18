@@ -5,7 +5,7 @@ the database to be available.
 
 import time
 from psycopg2 import OperationalError as Psycopg2Error
-from django.db.utils import OperationalError #this error that django throws when db is not ready
+from django.db.utils import OperationalError  # This error Django throws when DB is not ready
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Entry for commands"""
         self.stdout.write('Waiting for database...')
-        db_up=False
+        db_up = False
         while db_up is False:
             try:
                 self.check(databases=['default'])

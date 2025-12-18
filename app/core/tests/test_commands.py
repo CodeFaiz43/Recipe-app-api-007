@@ -32,7 +32,8 @@ class CommandTests(SimpleTestCase):
         
     
     @patch('time.sleep')
-    def test_wait_for_db_ready(self,patched_sleep,patched_check):
+    def test_wait_for_db_retry(self, patched_sleep, patched_check):
+
         """Test waiting for db when db is unavailable initially."""
         # simulating db being unavailable initially
 
